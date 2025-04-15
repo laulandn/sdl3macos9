@@ -1,0 +1,1 @@
+/* dummy stubs */#include <stdio.h>#include <stdlib.h>/* This is just a placeholder */void *alloca(size_t size){  return malloc(size);}

@@ -1,0 +1,1 @@
+/* dummy stubs */#include <stdio.h>#include <utime.h>/* This is just a placeholder */void gettimeofday(timeval *,long){  fprintf(stderr,"gettimeofday dummy called!\n");}int select(int,long,long,long,timeval *){  fprintf(stderr,"select dummy called!\n");  return 0;}
