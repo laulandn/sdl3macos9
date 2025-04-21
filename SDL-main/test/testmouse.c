@@ -149,7 +149,7 @@ static void loop(void *arg)
 
         case SDL_EVENT_MOUSE_BUTTON_DOWN:
             if (!active) {
-                active = SDL_calloc(1, sizeof(*active));
+                active = (Object *)SDL_calloc(1, sizeof(*active));
                 active->x1 = active->x2 = event.button.x;
                 active->y1 = active->y2 = event.button.y;
                 active->isRect = isRect;

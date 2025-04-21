@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
         exit(1);
     }
-    for (scancode = 0; scancode < SDL_SCANCODE_COUNT; ++scancode) {
+    for (scancode = (SDL_Scancode)0; scancode < SDL_SCANCODE_COUNT; ++scancode) {
         SDL_Log("Scancode #%d, \"%s\"", scancode,
                 SDL_GetScancodeName(scancode));
     }

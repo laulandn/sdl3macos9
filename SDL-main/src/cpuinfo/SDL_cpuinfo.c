@@ -23,7 +23,7 @@
 
 #include "SDL_cpuinfo_c.h"
 
-#ifdef __MWERKS__
+#ifdef __MACOSCLASSIC__
 #include <Gestalt.h>
 #endif
 
@@ -1205,7 +1205,7 @@ int SDL_GetSystemRAM(void)
             }
         }
 #endif
-#ifdef __MWERKS__
+#ifdef __MACOSCLASSIC__
         if (SDL_SystemRAM <= 0) {
           long response;
 		  if(!Gestalt(gestaltLogicalRAMSize, &response)) SDL_SystemRAM=response/(1024*1024);

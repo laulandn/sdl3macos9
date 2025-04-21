@@ -1,3 +1,5 @@
+#define __MACOSCLASSIC__ 1
+
 /*
   Simple DirectMedia Layer
   Copyright (C) 1997-2025 Sam Lantinga <slouken@libsdl.org>
@@ -50,7 +52,7 @@
 #include "SDL_build_config_amigaos4.h"
 #else
 /* This is a minimal configuration just to get SDL running on new platforms. */
-#ifdef __MWERKS__
+#ifdef __MACOSCLASSIC__
 #include "SDL_build_config_macosclassic.h"
 #else
 #include "SDL_build_config_minimal.h"

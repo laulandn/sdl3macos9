@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
         i += consumed;
     }
 
-    threads = SDL_malloc(nb_threads * sizeof(SDL_Thread*));
+    threads = (SDL_Thread **)SDL_malloc(nb_threads * sizeof(SDL_Thread*));
 
     /* Load the SDL library */
     if (!SDL_Init(0)) {

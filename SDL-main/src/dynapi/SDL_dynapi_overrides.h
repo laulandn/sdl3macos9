@@ -26,7 +26,7 @@
 #error You should not be here.
 #endif
 
-#ifdef __MWERKS__
+#ifdef __MACOSCLASSIC__
 #else
 // New API symbols are added at the end
 #define SDL_AcquireCameraFrame SDL_AcquireCameraFrame_REAL

@@ -49,7 +49,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
             SDLTest_CommonLogUsage(state, argv[0], options);
             SDL_Quit();
             SDLTest_CommonDestroyState(state);
-            return 1;
+            return (SDL_AppResult)1;
         }
         i += consumed;
     }
@@ -75,7 +75,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't create texture: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     } else {
-        static const Uint32 blank[512 * 512];
+        static Uint32 blank[512 * 512];
         const SDL_Rect rect = { 0, 0, 512, 512 };
         SDL_UpdateTexture(texture, &rect, blank, 512 * sizeof (Uint32));
     }
@@ -111,8 +111,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Failed!");
         return SDL_APP_FAILURE;
     }
-    SDL_WriteAsyncIO(asyncio, "hello", 0, 5, queue, "asyncio.tmp (write)");
-    SDL_CloseAsyncIO(asyncio, true, queue, "asyncio.tmp (flush/close)");
+    SDL_WriteAsyncIO(asyncio, (void *)"hello", 0, 5, queue, (void *)"asyncio.tmp (write)");
+    SDL_CloseAsyncIO(asyncio, true, queue, (void *)"asyncio.tmp (flush/close)");
 
     return SDL_APP_CONTINUE;
 }

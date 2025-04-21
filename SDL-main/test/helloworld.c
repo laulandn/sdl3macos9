@@ -649,7 +649,7 @@ static void testSystemCursors()
 
             SDL_SetWindowTitle(w, buf);
 
-            SDL_SetCursor( SDL_CreateSystemCursor(c) );
+            SDL_SetCursor( SDL_CreateSystemCursor((SDL_SystemCursor)c) );
             SDL_ShowCursor();
 
             SDL_Delay(1000);

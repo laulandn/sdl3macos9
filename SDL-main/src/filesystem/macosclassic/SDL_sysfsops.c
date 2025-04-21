@@ -21,7 +21,7 @@
 
 #include "SDL_internal.h"
 
-#if defined(SDL_FSOPS_DUMMY)
+#if defined(SDL_FSOPS_MACOSCLASSIC)
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // System dependent filesystem routines
@@ -58,5 +58,5 @@ bool SDL_SYS_GetPathInfo(const char *path, SDL_PathInfo *info)
     return SDL_Unsupported();
 }
 
-#endif // SDL_FSOPS_DUMMY
+#endif // SDL_FSOPS_MACOSCLASSIC
 

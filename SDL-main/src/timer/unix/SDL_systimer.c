@@ -20,17 +20,18 @@
 */
 #include "SDL_internal.h"
 
-#ifdef __MWERKS__
-#define SDL_TIMER_UNIX 1
-#endif
-
 #ifdef SDL_TIMER_UNIX
 
 #include <stdio.h>
+#ifdef __MACOSCLASSIC__
 #ifdef __MWERKS__
 #include <utime.h>
-extern void gettimeofday(timeval *,long);
-extern int select(int,long,long,long,timeval *);
+extern void gettimeofday(struct timeval *,long);
+extern int select(int,long,long,long,struct timeval *);
+#else
+#include <sys/time.h>
+extern int select(int,fd_set *,fd_set *,fd_set *,struct timeval *) { return 0; }
+#endif
 #else
 #include <sys/time.h>
 #endif

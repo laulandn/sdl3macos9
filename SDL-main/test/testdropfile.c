@@ -54,7 +54,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     if (!SDLTest_CommonInit(state)) {
         goto onerror;
     }
-    dialog = SDL_calloc(1, sizeof(dropfile_dialog));
+    dialog = (dropfile_dialog *)SDL_calloc(1, sizeof(dropfile_dialog));
     if (!dialog) {
         goto onerror;
     }
@@ -69,7 +69,7 @@ onerror:
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {
-    dropfile_dialog *dialog = appstate;
+    dropfile_dialog *dialog = (dropfile_dialog *)appstate;
     if (event->type == SDL_EVENT_DROP_BEGIN) {
         SDL_Log("Drop beginning on window %u at (%f, %f)", (unsigned int)event->drop.windowID, event->drop.x, event->drop.y);
     } else if (event->type == SDL_EVENT_DROP_COMPLETE) {
@@ -94,7 +94,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
-    dropfile_dialog *dialog = appstate;
+    dropfile_dialog *dialog = (dropfile_dialog *)appstate;
     int i;
 
     for (i = 0; i < dialog->state->num_windows; ++i) {
@@ -116,7 +116,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
 void SDL_AppQuit(void *appstate, SDL_AppResult result)
 {
-    dropfile_dialog *dialog = appstate;
+    dropfile_dialog *dialog = (dropfile_dialog *)appstate;
     if (dialog) {
         SDLTest_CommonState *state = dialog->state;
         SDL_free(dialog);
