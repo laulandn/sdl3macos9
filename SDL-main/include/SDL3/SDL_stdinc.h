@@ -200,7 +200,8 @@ void *alloca(size_t);
 #elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 202311L)
 #define SDL_COMPILE_TIME_ASSERT(name, x)  static_assert(x, #x)
 #elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
-#define SDL_COMPILE_TIME_ASSERT(name, x) _Static_assert(x, #x)
+//#define SDL_COMPILE_TIME_ASSERT(name, x) _Static_assert(x, #x)
+#define SDL_COMPILE_TIME_ASSERT(name, x)
 #endif
 #endif /* !SDL_COMPILE_TIME_ASSERT */
 

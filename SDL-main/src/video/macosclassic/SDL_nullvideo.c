@@ -129,7 +129,7 @@ VideoBootStrap DUMMY_bootstrap = {
 
 static void DUMMY_EVDEV_Poll(SDL_VideoDevice *_this)
 {
-    (void)_this;
+    //(void)_this;
     SDL_EVDEV_Poll();
 }
 

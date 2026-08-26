@@ -56,6 +56,11 @@
 
             int SDL_main(int argc, char **argv)
             {
+  freopen ("stdout.txt", "w", stdout);
+  freopen ("stderr.txt", "w", stderr);
+
+fprintf(stderr,"About to SDL_EnterAppMainCallbacks...\n"); fflush(stderr);
+
                 return SDL_EnterAppMainCallbacks(argc, argv, SDL_AppInit, SDL_AppIterate, SDL_AppEvent, SDL_AppQuit);
             }
 

@@ -2,7 +2,8 @@ PATH_TO_RETRO68=$(HOME)/Retro68-build/toolchain/powerpc-apple-macos
 
 .SUFFIXES:	.xcoff
 
-CC     = powerpc-apple-macos-g++
+CC=powerpc-apple-macos-gcc
+CXX=powerpc-apple-macos-g++
 
 CFLAGS = -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
 
@@ -366,8 +367,9 @@ clean:
 
 .o.xcoff:
 	$(CC) -o $@ $< testutils.o $(LIBPATH) $(LIBS)
-	MakePEF -o $*.pef $@
-	Rez -I$(RINC) $(RES) --data $*.pef -t "APPL" -c "????" -o $*.bin --cc $*.APPL --cc $*.dsk
+	mv $@ $*
+	../../xcoff2app.sh $*
+	rm $*
 
 %.d : %.c
 	@echo Making dependencies for $<

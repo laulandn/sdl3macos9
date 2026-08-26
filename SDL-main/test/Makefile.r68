@@ -1,10 +1,11 @@
 # Makefile to build the AmigaOS4 SDL tests
 
-CC     = powerpc-apple-macos-gcc
+CC     = m68k-apple-macos-gcc
+CXX     = m68k-apple-macos-g++
 #CRT   ?= newlib
 #CFLAGS = -mcrt=$(CRT) -gstabs -O3 -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
-CFLAGS = -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
-LIBS   = -L.. -lSDL3 -lSDL3_test
+CFLAGS = -Wall -I../include -I../include/build_config -I../src  -DHAVE_OPENGL -m68020 -fno-common -fPIC -fno-pic -O0 -ffunction-sections -fdata-sections -fno-profile-arcs -fno-test-coverage -fno-stack-protector -fno-instrument-functions -fno-plt -Wl,--mac-single -Wl,-gc-sections -fno-jump-tables -DSDL_MAIN_HANDLED
+LIBS   = -L.. -lSDL3_test -lSDL3  -lOpenGLLibrary -lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
 
 SRC_FILES = $(wildcard *.c)
 DEPS = $(SRC_FILES:.c=.d)
@@ -91,40 +92,52 @@ TARGETS = \
 all: $(TARGETS)
 
 checkkeys: checkkeys.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 childprocess: childprocess.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 helloworld: helloworld.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 loopwave: loopwave.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 sdl3benchmark: sdl3benchmark.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testasyncio: testasyncio.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testatomic: testatomic.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testaudio: testaudio.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testaudiohotplug: testaudiohotplug.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testaudioinfo: testaudioinfo.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testaudiorecording: testaudiorecording.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testaudiostreamdynamic: testaudiostreamdynamic.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testautomation: testautomation.o \
 		      testautomation_audio.o \
@@ -154,199 +167,264 @@ testautomation: testautomation.o \
 		      testautomation_time.o \
 		      testautomation_timer.o \
 		      testautomation_video.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testbounds: testbounds.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testclipboard: testclipboard.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testcolorspace: testcolorspace.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testcontroller: testcontroller.o gamepadutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testcustomcursor: testcustomcursor.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testdialog: testdialog.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testdisplayinfo: testdisplayinfo.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testdraw: testdraw.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testdrawchessboard: testdrawchessboard.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testdropfile: testdropfile.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testerror: testerror.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testfile: testfile.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testfilesystem: testfilesystem.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testgeometry: testgeometry.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testgl: testgl.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testgles: testgles.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testgles2: testgles2.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testhaptic: testhaptic.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testhittesting: testhittesting.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testhotplug: testhotplug.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testiconv: testiconv.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testime: testime.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testintersections: testintersections.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testkeys: testkeys.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testloadso: testloadso.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testlocale: testlocale.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testlock: testlock.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testmessage: testmessage.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testmouse: testmouse.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testmultiaudio: testmultiaudio.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testnative: testnative.o testnativeapple-macos4.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testoffscreen: testoffscreen.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testoverlay: testoverlay.o testyuv_cvt.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testpen: testpen.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testplatform: testplatform.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testpower: testpower.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testprocess: testprocess.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testqsort: testqsort.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testrelative: testrelative.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testrendercopyex: testrendercopyex.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testrendertarget: testrendertarget.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testresample: testresample.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testrumble: testrumble.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testrwlock: testrwlock.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testscale: testscale.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testsem: testsem.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testsensor: testsensor.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testshader: testshader.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testshape: testshape.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testsprite: testsprite.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testspriteminimal: testspriteminimal.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testspritesurface: testspritesurface.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 teststreaming: teststreaming.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testsurround: testsurround.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testthread: testthread.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testtime: testtime.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testtimer: testtimer.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testurl: testurl.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testver: testver.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testviewport: testviewport.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testvulkan: testvulkan.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testwm: testwm.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 testyuv: testyuv.o testyuv_cvt.o testutils.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 torturethread: torturethread.o
-	$(CC) -o $@ $^ $(LIBS)
+	$(CXX) -o $@.code.bin $^ $(LIBS)
+	../../bin2app.sh $@
 
 clean:
 	rm -f $(TARGETS) *.o $(DEPS)

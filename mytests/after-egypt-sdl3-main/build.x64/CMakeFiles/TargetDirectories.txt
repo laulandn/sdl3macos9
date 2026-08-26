@@ -1,0 +1,3 @@
+/Users/nick/Downloads/after-egypt-sdl3-main/build/CMakeFiles/after-egypt-sdl3.dir
+/Users/nick/Downloads/after-egypt-sdl3-main/build/CMakeFiles/edit_cache.dir
+/Users/nick/Downloads/after-egypt-sdl3-main/build/CMakeFiles/rebuild_cache.dir
