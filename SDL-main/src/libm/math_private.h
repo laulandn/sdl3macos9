@@ -38,7 +38,7 @@ typedef unsigned int u_int32_t;
 #ifndef u_int32_t
 #define u_int32_t unsigned long
 #endif
-#if !powerc
+#if !__POWERPC__
 #undef atan
 #undef copysign
 #undef cos

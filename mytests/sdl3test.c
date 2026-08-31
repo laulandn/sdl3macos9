@@ -5,6 +5,11 @@
 
 int main(int argc, char *argv[]) {
 
+  freopen ("stdout.txt", "w", stdout);
+  freopen ("stderr.txt", "w", stderr);
+     
+fprintf(stderr,"About to SDL_Init...\n"); fflush(stderr);
+
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("SDL init failed: %s", SDL_GetError());
         return 1;

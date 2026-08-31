@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 
+
 namespace fs = std::filesystem;
 
 namespace {
@@ -898,7 +899,7 @@ private:
 
             switch (type) {
             case 3:
-                thick = std::max(1, readI32(data, p + 1));
+                thick = std::max(1, (int)readI32(data, p + 1));
                 break;
             case 7:
                 shiftX += readI32(data, p + 1);
@@ -1032,7 +1033,7 @@ private:
                 color = static_cast<uint8_t>(data[p + 1] & 0x0F);
                 break;
             case 3:
-                thick = std::max(1, readI32(data, p + 1));
+                thick = std::max(1, (int)readI32(data, p + 1));
                 break;
             case 7:
                 shiftX += readI32(data, p + 1);
@@ -1142,6 +1143,7 @@ class AfterEgyptApp {
 public:
     AfterEgyptApp()
     {
+fprintf(stderr,"About to SDL_Init...\n"); fflush(stderr);
         if (!SDL_Init(SDL_INIT_VIDEO)) {
             throw std::runtime_error(SDL_GetError());
         }
@@ -3417,6 +3419,8 @@ Args parseArgs(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+  freopen ("stdout.txt", "w", stdout);
+  freopen ("stderr.txt", "w", stderr);
     try {
         const Args args = parseArgs(argc, argv);
         AfterEgyptApp app;
