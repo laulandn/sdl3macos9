@@ -18,7 +18,7 @@ ifeq ($(RETRO68_ROOT),)
 RETRO68_ROOT = $(PATH_TO_RETRO68)/..
 endif
 #CURSOR_DEVICES_GLUE ?= $(RETRO68_ROOT)/universal/libppc/CursorDevicesGlue.o
-CFLAGS ?= -Wall -Wshadow -m68020 -fno-common -m68020 -O0 -fno-common -fno-profile-arcs -fno-test-coverage -fno-stack-protector -fno-instrument-functions -fno-plt -fno-jump-tables
+CFLAGS ?= -Wall -Wshadow
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
 CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src -D__MACOSCLASSIC__ -DMAC_DEBUG=1
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DMAC_DEBUG=1 -DBUILDING_FOR_PRE9
@@ -50,6 +50,7 @@ SOURCES = \
 	./src/joystick/dummy/*.c \
 	./src/libm/*.c \
 	./src/locale/*.c \
+	./src/main/macosclassic/*.c \
 	./src/main/generic/SDL_sysmain_callbacks.c \
 	./src/main/SDL_main_callbacks.c \
 	./src/main/SDL_runapp.c \

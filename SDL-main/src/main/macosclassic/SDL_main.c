@@ -715,6 +715,9 @@ int main(int argc, char *argv[])
 #if !(defined(__APPLE__) && defined(__MACH__))
 //#pragma unused(argc, argv)
 #endif
+
+		freopen (STDOUT_FILE, "w", stdout);
+		freopen (STDERR_FILE, "w", stderr);
 	
 #define DEFAULT_ARGS "\p"                /* pascal string for default args */
 #define DEFAULT_VIDEO_DRIVER "\ptoolbox" /* pascal string for default video driver name */	
@@ -941,13 +944,14 @@ int main(int argc, char *argv[])
 #if !(defined(__APPLE__) && defined(__MACH__))
 	prefs.output_to_file=TRUE;
     /* Redirect standard I/O to files */
+    /*
 	if ( prefs.output_to_file ) {
 		freopen (STDOUT_FILE, "w", stdout);
 		freopen (STDERR_FILE, "w", stderr);
 	} else {
 		fclose (stdout);
 		fclose (stderr);
-	}
+	}*/
 #endif
 
 #ifdef APPLEEVENT_SUPPORT

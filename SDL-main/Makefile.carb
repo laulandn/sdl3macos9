@@ -1,0 +1,139 @@
+# Makefile to build the classic MacOS SDL library for PPC
+# (Based on AmigaOS4 Makefile)
+
+PATH_TO_RETRO68=$(HOME)/Retro68-build/toolchain/powerpc-apple-macos
+
+AR = ar
+RANLIB = ranlib
+CC = gcc -std=c99
+CXX = g++ -std=c99
+STRIP = strip
+#CRT ?= newlib
+INSTALL_PATH ?=
+CATCOMP = catcomp # TODO: is there a cross-compiler version?
+
+#MACDATE = $(shell date +"%-d.%m.%Y")
+
+#CFLAGS  = -mcrt=$(CRT) -gstabs -O3 -Wall -Werror -Wshadow -fPIC -fcommon -I./include -D__MACDATE__=\"$(MACDATE)\"
+RETRO68_ROOT ?= $(abspath $(dir $(shell command -v $(CC)))/..)
+ifeq ($(RETRO68_ROOT),)
+RETRO68_ROOT = $(PATH_TO_RETRO68)/..
+endif
+CURSOR_DEVICES_GLUE ?= 
+CFLAGS ?= -g -Wall -Wshadow -DTARGET_OS_OSX=1 -DTARGET_API_MAC_CARBON=1 -DTARGET_RT_MAC_MACHO=1
+#CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
+CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src -D__MACOSCLASSIC__ -DMAC_DEBUG=1
+#CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DMAC_DEBUG=1 -DBUILDING_FOR_PRE9
+#CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1 -DMAC_DEBUG=1
+
+TARGET_STATIC  = libSDL3.a
+#TARGET_SHARED  = libSDL3-3.2.so
+TESTLIB_STATIC = libSDL3_test.a
+#PREFS_PROGRAM = SDL3
+
+SOURCES = \
+	./src/*.c \
+	./src/atomic/*.c \
+	./src/audio/*.c \
+	./src/audio/dummy/*.c \
+	./src/camera/*.c \
+	./src/cpuinfo/*.c \
+	./src/dialog/*.c \
+	./src/events/*.c \
+	./src/filesystem/macosclassic/*.c \
+	./src/filesystem/SDL_filesystem.c \
+	./src/gpu/SDL_gpu.c \
+	./src/haptic/*.c \
+	./src/haptic/dummy/*.c \
+	./src/io/*.c \
+	./src/io/generic/SDL_asyncio_generic.c \
+	./src/joystick/*.c \
+	./src/joystick/virtual/*.c \
+	./src/joystick/dummy/*.c \
+	./src/libm/*.c \
+	./src/locale/*.c \
+	./src/main/generic/SDL_sysmain_callbacks.c \
+	./src/main/SDL_main_callbacks.c \
+	./src/main/SDL_runapp.c \
+	./src/misc/*.c \
+	./src/power/*.c \
+	./src/process/*.c \
+	./src/render/*.c \
+	./src/render/opengles2/*.c \
+	./src/render/software/*.c \
+	./src/sensor/*.c \
+	./src/sensor/dummy/*.c \
+	./src/stdlib/*.c \
+	./src/storage/SDL_storage.c \
+	./src/storage/generic/SDL_genericstorage.c \
+	./src/thread/*.c \
+	./src/thread/generic/*.c \
+	./src/time/SDL_time.c \
+	./src/time/unix/*.c \
+	./src/timer/*.c \
+	./src/timer/unix/*.c \
+	./src/tray/SDL_tray_utils.c \
+	./src/tray/dummy/SDL_tray.c \
+	./src/video/*.c \
+	./src/video/dummy/*.c \
+	./src/video/macosclassic/*.c \
+	./src/video/yuv2rgb/*.c \
+
+TESTLIB_SOURCES =./src/test/*.c
+
+OBJECTS = $(shell echo $(SOURCES) | sed -e 's,\.c,\.o,g')
+TESTLIB_OBJECTS = $(shell echo $(TESTLIB_SOURCES) | sed -e 's,\.c,\.o,g')
+MAIN_OBJECT = src/main/macosclassic/SDL_main.o
+ALL_OBJECTS = $(OBJECTS) $(TESTLIB_OBJECTS) $(MAIN_OBJECT) $(PREFS_OBJECT)
+DEPS = $(ALL_OBJECTS:.o=.d)
+
+
+all: info $(TARGET_STATIC) $(TARGET_SHARED) $(TESTLIB_STATIC) $(PREFS_PROGRAM)
+	@echo All done
+
+info:
+	@echo Compiler flags: $(CFLAGS)
+
+debug: CFLAGS += -DDEBUG
+
+debug: all
+
+$(TESTLIB_STATIC): $(TESTLIB_OBJECTS)
+	@echo Creating $@
+	@$(AR) crv $@ $^
+	@$(RANLIB) $@
+
+$(TARGET_STATIC): $(OBJECTS) $(CURSOR_DEVICES_GLUE)
+	@echo Creating $@
+	@$(AR) crv $@ $^
+	@$(RANLIB) $@
+#	@$(AR) crv libSDL2main.a $(MAIN_OBJECT) 
+#	@$(RANLIB) libSDL2main.a
+
+$(TARGET_SHARED): $(OBJECTS) $(MAIN_OBJECT)
+	@echo Linking $@
+	@$(CC) -mcrt=$(CRT) -shared -Wl,-soname,$(TARGET_SHARED) -o $(TARGET_SHARED) $(OBJECTS) $(VERSION_OBJECT)
+
+clean:
+	@echo Cleaning
+	@rm -f $(TARGET_STATIC) $(TARGET_SHARED) $(TESTLIB_STATIC) $(ALL_OBJECTS) $(PREFS_PROGRAM) $(DEPS)
+	make -C test -fMakefile.r68ppc clean
+
+install:
+	mkdir -p $(PATH_TO_RETRO68)/include/SDL3
+	mkdir -p $(PATH_TO_RETRO68)/lib
+	cp -r include/* $(PATH_TO_RETRO68)/include/SDL3
+	cp libSDL*.a $(PATH_TO_RETRO68)/lib
+
+%.o : %.c
+	@echo Compiling $<
+	@$(CC) -o $@ -c $< $(CPPFLAGS) $(CFLAGS)
+
+%.d : %.c
+	@echo Making dependencies for $<
+	@$(CC) -MM -MP -MT $(@:.d=.o) -o $@ $< $(CPPFLAGS) $(CFLAGS)
+
+# Load .d files
+ifneq ($(MAKECMDGOALS),clean)
+-include $(DEPS)
+endif

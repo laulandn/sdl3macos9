@@ -30,7 +30,9 @@ extern void gettimeofday(struct timeval *,long);
 extern int select(int,long,long,long,struct timeval *);
 #else
 #include <sys/time.h>
+#ifndef TARGET_OS_OSX
 extern int select(int,fd_set *,fd_set *,fd_set *,struct timeval *) { return 0; }
+#endif
 #endif
 #else
 #include <sys/time.h>

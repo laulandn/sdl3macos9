@@ -534,7 +534,9 @@ static int videoInit()
     if(myDepth==16) m.format=SDL_PIXELFORMAT_XRGB1555;
     else m.format=SDL_PIXELFORMAT_XRGB8888;
 
-    SDL_AddDisplayMode(sdlvdisp,&m);
+    //SDL_AddDisplayMode(sdlvdisp,&m);
+    SDL_AddVideoDisplay(sdlvdisp,false);
+    SDL_AddBasicVideoDisplay(&m);
     SDL_SetCurrentDisplayMode(sdlvdisp,&m);
     SDL_SetDesktopDisplayMode(sdlvdisp,&m);
 

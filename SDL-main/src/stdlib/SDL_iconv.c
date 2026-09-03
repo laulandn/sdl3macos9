@@ -832,7 +832,7 @@ char *SDL_iconv_string(const char *tocode, const char *fromcode, const char *inb
 #ifdef __MWERKS__
             const long diff = (long) (outbuf - string);
 #else
-            const ptrdiff_t diff = (ptrdiff_t) (outbuf - string);
+            const long diff = (long) (outbuf - string);
 #endif
             char *oldstring = string;
             stringsize *= 2;

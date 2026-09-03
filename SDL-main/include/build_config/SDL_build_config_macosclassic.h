@@ -19,8 +19,8 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef SDL_config_mwerks_h_
-#define SDL_config_mwerks_h_
+#ifndef SDL_config_macosclassic_h_
+#define SDL_config_macosclassic_h_
 #define SDL_config_h_
 
 #include <SDL3/SDL_platform_defines.h>
@@ -31,6 +31,8 @@
  */
 
 extern void SDL_TriggerBreakpoint();
+
+#define HAVE_LIBC 1
 
 #define SDL_BYTEORDER 4321
 
@@ -174,12 +176,12 @@ typedef unsigned int uintptr_t;
 #define SDL_TIMER_UNIX 1
 
 /* Enable the dummy video driver (src/video/dummy/\*.c) */
-/*#define SDL_VIDEO_DRIVER_DUMMY  1*/
-#define SDL_VIDEO_DRIVER_MACOSCLASSIC  1
+#define SDL_VIDEO_DRIVER_DUMMY  1
+//#define SDL_VIDEO_DRIVER_MACOSCLASSIC  1
 
 /* Enable the dummy filesystem driver (src/filesystem/dummy/\*.c) */
 /*#define SDL_FILESYSTEM_DUMMY  1*/
 #define SDL_FILESYSTEM_MACOSCLASSIC 1
 #define SDL_FSOPS_MACOSCLASSIC 1
 
-#endif /* SDL_config_mwerks_h_ */
+#endif /* SDL_config_macosclassic_h_ */

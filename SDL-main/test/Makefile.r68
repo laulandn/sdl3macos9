@@ -4,7 +4,7 @@ CC     = m68k-apple-macos-gcc
 CXX     = m68k-apple-macos-g++
 #CRT   ?= newlib
 #CFLAGS = -mcrt=$(CRT) -gstabs -O3 -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
-CFLAGS = -Wall -I../include -I../include/build_config -I../src  -DHAVE_OPENGL -m68020 -fno-common -fPIC -fno-pic -O0 -ffunction-sections -fdata-sections -fno-profile-arcs -fno-test-coverage -fno-stack-protector -fno-instrument-functions -fno-plt -Wl,--mac-single -Wl,-gc-sections -fno-jump-tables -DSDL_MAIN_HANDLED
+CFLAGS = -Wall -I../include -I../include/build_config -I../src  -DHAVE_OPENGL -malign-int
 LIBS   = -L.. -lSDL3_test -lSDL3  -lOpenGLLibrary -lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
 
 SRC_FILES = $(wildcard *.c)
@@ -54,7 +54,6 @@ TARGETS = \
 	testmessage \
 	testmouse \
 	testmultiaudio \
-	testnative \
 	testoffscreen \
 	testoverlay \
 	testpen \
@@ -290,9 +289,9 @@ testmultiaudio: testmultiaudio.o testutils.o
 	$(CXX) -o $@.code.bin $^ $(LIBS)
 	../../bin2app.sh $@
 
-testnative: testnative.o testnativeapple-macos4.o testutils.o
-	$(CXX) -o $@.code.bin $^ $(LIBS)
-	../../bin2app.sh $@
+#testnative: testnative.o testnativeapple-macos4.o testutils.o
+#	$(CXX) -o $@.code.bin $^ $(LIBS)
+#	../../bin2app.sh $@
 
 testoffscreen: testoffscreen.o
 	$(CXX) -o $@.code.bin $^ $(LIBS)
