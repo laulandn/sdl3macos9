@@ -5,8 +5,8 @@
 #include <MacTypes.h>
 
 
-#ifdef __POWERPC__
 static inline UInt16 DisableInterrupts(void) {
+#ifdef __POWERPC__
   return 0;
 #else
 /**
@@ -28,8 +28,8 @@ static inline UInt16 DisableInterrupts(void) {
 }
 
 
-#ifdef __POWERPC__
 static inline void RestoreInterrupts(UInt16 oldSR) {
+#ifdef __POWERPC__
 #else
 /**
  * Restores the 68k Status Register to its previous state.

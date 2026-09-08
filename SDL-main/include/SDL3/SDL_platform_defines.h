@@ -28,6 +28,10 @@
 #ifndef SDL_platform_defines_h_
 #define SDL_platform_defines_h_
 
+// For now...
+#define SDL_PLATFORM_MACOSCLASSIC 1
+
+
 #ifdef _AIX
 
 /**

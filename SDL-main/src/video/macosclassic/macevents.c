@@ -375,7 +375,7 @@ static void MacSendMouseMotion( Point global )
   SDL_SendMouseMotion(0,sdlw, 0, 0, x, y);
 }
 
-void SDL_Mac_pumpEvents(_this)
+void SDL_Mac_pumpEvents(/*_this*/)
 {
   EventRecord event;
   int etype;

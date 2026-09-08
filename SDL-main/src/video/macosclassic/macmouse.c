@@ -510,7 +510,7 @@ static void Mac_FreeCursor(SDL_Cursor *cursor)
     SDL_free(cursor);
 }
 
-static int Mac_ShowCursor(SDL_Cursor *cursor)
+static bool Mac_ShowCursor(SDL_Cursor *cursor)
 {
     /* The Classic Cursor Manager uses a visibility counter. Only make
        balanced transitions, and never leave the host cursor hidden after
@@ -600,7 +600,7 @@ static void Mac_MoveCursorGlobal(Point where)
 #endif
 }
 
-static void Mac_WarpMouse(SDL_Window *window, int x, int y)
+static bool Mac_WarpMouse(SDL_Window *window, float x, float y)
 {
     GrafPtr saved_port;
     Point where;
@@ -610,7 +610,7 @@ static void Mac_WarpMouse(SDL_Window *window, int x, int y)
 
     (void)window;
     if (!macport)
-        return;
+        return false;
 
 #if TARGET_API_MAC_CARBON
     GetPortBounds(macport, &bounds);
@@ -630,16 +630,17 @@ static void Mac_WarpMouse(SDL_Window *window, int x, int y)
     LocalToGlobal(&where);
     SetPort(saved_port);
     Mac_MoveCursorGlobal(where);
+    return true;
 }
 
-static int Mac_WarpMouseGlobal(int x, int y)
+static bool Mac_WarpMouseGlobal(float x, float y)
 {
     Point where;
 
     where.h = (short)x;
     where.v = (short)y;
     Mac_MoveCursorGlobal(where);
-    return 0;
+    return true;
 }
 
 void Mac_CenterMouse(void)
@@ -651,7 +652,7 @@ void Mac_CenterMouse(void)
     }
 }
 
-static int Mac_SetRelativeMouseMode(bool enabled)
+static bool Mac_SetRelativeMouseMode(bool enabled)
 {
     const int relative = enabled ? 1 : 0;
 
@@ -663,7 +664,7 @@ static int Mac_SetRelativeMouseMode(bool enabled)
     if (mac_relative_mouse && mac_window_active &&
         !Mac_InputSprocketIsActive())
         Mac_CenterMouse();
-    return 0;
+    return true;
 }
 
 int Mac_IsRelativeMouseMode(void)

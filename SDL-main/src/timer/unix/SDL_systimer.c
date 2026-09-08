@@ -23,20 +23,7 @@
 #ifdef SDL_TIMER_UNIX
 
 #include <stdio.h>
-#ifdef __MACOSCLASSIC__
-#ifdef __MWERKS__
-#include <utime.h>
-extern void gettimeofday(struct timeval *,long);
-extern int select(int,long,long,long,struct timeval *);
-#else
 #include <sys/time.h>
-#ifndef TARGET_OS_OSX
-extern int select(int,fd_set *,fd_set *,fd_set *,struct timeval *) { return 0; }
-#endif
-#endif
-#else
-#include <sys/time.h>
-#endif
 #include <unistd.h>
 #include <errno.h>
 

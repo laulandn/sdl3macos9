@@ -4,11 +4,16 @@ CC     = m68k-apple-macos-gcc
 CXX     = m68k-apple-macos-g++
 #CRT   ?= newlib
 #CFLAGS = -mcrt=$(CRT) -gstabs -O3 -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
-CFLAGS = -Wall -I../include -I../include/build_config -I../src  -DHAVE_OPENGL -malign-int
+CFLAGS = -Wall -I../include -I../include/build_config -I../src
 LIBS   = -L.. -lSDL3_test -lSDL3  -lOpenGLLibrary -lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
+
+
+CFLAGS+= -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_TINYGL=1 -DHAVE_OPENGL=1
+
 
 SRC_FILES = $(wildcard *.c)
 DEPS = $(SRC_FILES:.c=.d)
+
 
 TARGETS = \
 	checkkeys \
@@ -434,7 +439,7 @@ clean:
 
 %.o : %.c
 	@echo Compiling $<
-	@$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 # Load .d files
 ifneq ($(MAKECMDGOALS),clean)

@@ -1,6 +1,8 @@
 # Makefile to build the classic MacOS SDL library for PPC
 # (Based on AmigaOS4 Makefile)
 
+PATH_TO_RETRO68=$(HOME)/Retro68-build/toolchain/m68k-apple-macos
+
 AR = m68k-apple-macos-ar
 RANLIB = m68k-apple-macos-ranlib
 CC = m68k-apple-macos-gcc
@@ -121,7 +123,7 @@ clean:
 install:
 	mkdir -p $(PATH_TO_RETRO68)/include/SDL3
 	mkdir -p $(PATH_TO_RETRO68)/lib
-	cp -r include/* $(PATH_TO_RETRO68)/include/SDL3
+	cp -r include/SDL3 $(PATH_TO_RETRO68)/include/.
 	cp libSDL*.a $(PATH_TO_RETRO68)/lib
 
 %.o : %.c

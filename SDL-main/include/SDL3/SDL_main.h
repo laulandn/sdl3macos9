@@ -228,6 +228,15 @@
         */
         #define SDL_MAIN_AVAILABLE
 
+    #elif defined(SDL_PLATFORM_MACOSCLASSIC)
+        /*
+          On N3DS, SDL provides a main function that sets up the screens
+          and storage.
+
+          If you provide this yourself, you may define SDL_MAIN_HANDLED
+        */
+        #define SDL_MAIN_AVAILABLE
+
     #endif
 #endif /* SDL_MAIN_HANDLED */
 

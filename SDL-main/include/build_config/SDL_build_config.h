@@ -43,7 +43,9 @@
 #include "SDL_build_config_xbox.h"
 #elif defined(SDL_PLATFORM_MACOS)
 #include "SDL_build_config_macos.h"
-#error wrong macos!
+#elif defined(SDL_PLATFORM_MACOSCLASSIC)
+#include "SDL_build_config_macosclassic.h"
+//#error wrong macos!
 #elif defined(SDL_PLATFORM_IOS)
 #include "SDL_build_config_ios.h"
 #elif defined(SDL_PLATFORM_ANDROID)
@@ -52,11 +54,7 @@
 #include "SDL_build_config_amigaos4.h"
 #else
 /* This is a minimal configuration just to get SDL running on new platforms. */
-#ifdef __MACOSCLASSIC__
-#include "SDL_build_config_macosclassic.h"
-#else
 #include "SDL_build_config_minimal.h"
-#endif
 #endif /* platform config */
 
 #ifdef USING_GENERATED_CONFIG_H

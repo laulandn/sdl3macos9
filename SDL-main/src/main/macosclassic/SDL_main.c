@@ -46,14 +46,19 @@
 /*#endif*/
 #endif
 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
 /* Include the SDL main definition header */
-#include "SDL.h"
-#include "SDL_main.h"
+#include "SDL_internal.h"
+//#include "SDL_main.h"
 #ifdef main
 #undef main
 #endif
 
-#ifdef SDL_MAIN_NEEDED
+#if 1
 
 #if !TARGET_API_MAC_CARBON
 /* Classic's default Color QuickDraw application stack is only 24 KiB.
@@ -710,7 +715,7 @@ static int writePreferences (PrefsRecord *prefs) {
 }
 
 /* This is where execution begins */
-int main(int argc, char *argv[])
+int SDL_RunApp(int argc, char *argv[], SDL_main_func mainFunction, void * reserved)
 {
 #if !(defined(__APPLE__) && defined(__MACH__))
 //#pragma unused(argc, argv)
@@ -820,7 +825,7 @@ int main(int argc, char *argv[])
 
 /* Set up SDL's QuickDraw environment  */
 #if !TARGET_API_MAC_CARBON
-	SDL_InitQuickDraw(&qd);
+	//SDL_InitQuickDraw(&qd);
 #endif
 
         fprintf(stderr,"main going to read prefs...\n"); fflush(stderr);
@@ -1074,7 +1079,7 @@ int main(int argc, char *argv[])
 /*#ifdef DEBUG_APPLEEVENTS*/
 	fprintf(stderr,"Going to call SDL_main...\n"); fflush(stderr);
 /*#endif*/
-	SDL_main(nargs, args);
+	mainFunction(nargs, args);
 	free (args);
 	free (commandLine);
    
@@ -1085,7 +1090,7 @@ int main(int argc, char *argv[])
         argc=1;
         argv[1]="";
         argv[2]="";
-	SDL_main(argc,argv);
+	mainFunction(argc,argv);
 #endif
    	
 	/* Exit cleanly, calling atexit() functions */
