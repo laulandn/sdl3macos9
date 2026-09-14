@@ -20,55 +20,46 @@
 */
 #include "SDL_internal.h"
 
-#if defined(SDL_FILESYSTEM_MACOSCLASSIC)
+#ifdef SDL_TIME_MACOSCLASSIC
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-// System dependent filesystem routines
+#include "../SDL_time_c.h"
 
-#include "../SDL_sysfilesystem.h"
+// PS2 epoch is Jan 1 2000 JST (UTC +9)
+#define UNIX_EPOCH_OFFSET_SEC 946717200
 
-
-#define DISABLE_MAC_DRIVER 1
-
-
-char *SDL_SYS_GetBasePath(void)
+// TODO: Implement this...
+void SDL_GetSystemTimeLocalePreferences(SDL_DateFormat *df, SDL_TimeFormat *tf)
 {
-#ifdef DISABLE_MAC_DRIVER
-    SDL_Unsupported();
-    return NULL;
-#else
-    return NULL;  /* For now... */
-#endif
 }
 
-char *SDL_SYS_GetPrefPath(const char *org, const char *app)
+bool SDL_GetCurrentTime(SDL_Time *ticks)
 {
-#ifdef DISABLE_MAC_DRIVER
-    SDL_Unsupported();
-    return NULL;
-#else
-    return NULL;  /* For now... */
-#endif
+    if (!ticks) {
+        return SDL_InvalidParamError("ticks");
+    }
+
+    *ticks = 0;
+
+    return true;
 }
 
-char *SDL_SYS_GetUserFolder(SDL_Folder folder)
+bool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime)
 {
-#ifdef DISABLE_MAC_DRIVER
-    SDL_Unsupported();
-    return NULL;
-#else
-    return NULL;  /* For now... */
-#endif
+    if (!dt) {
+        return SDL_InvalidParamError("dt");
+    }
+
+    dt->year = 1970;
+    dt->month = 1;
+    dt->day = 1;
+    dt->hour = 0;
+    dt->minute = 0;
+    dt->second = 0;
+    dt->nanosecond = 0;
+    dt->day_of_week = 4;
+    dt->utc_offset = 0;
+
+    return true;
 }
 
-char *SDL_SYS_GetCurrentDirectory(void)
-{
-#ifdef DISABLE_MAC_DRIVER
-    SDL_Unsupported();
-    return NULL;
-#else
-    return NULL;  /* For now... */
-#endif
-}
-
-#endif // SDL_FILESYSTEM_MACOSCLASSIC
+#endif // SDL_TIME_MACOSCLASSIC

@@ -5,7 +5,7 @@ CXX     = m68k-apple-macos-g++
 #CRT   ?= newlib
 #CFLAGS = -mcrt=$(CRT) -gstabs -O3 -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
 CFLAGS = -Wall -I../include -I../include/build_config -I../src
-LIBS   = -L.. -lSDL3_test -lSDL3  -lOpenGLLibrary -lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
+LIBS   = -L.. -lSDL3_test -lSDL3 ../../macos8addons/libmacos8addons.a -lOpenGLLibrary -lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
 
 
 CFLAGS+= -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_TINYGL=1 -DHAVE_OPENGL=1

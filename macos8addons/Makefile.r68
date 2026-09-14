@@ -18,6 +18,7 @@ OBJS=$(subst .c,.o,$(wildcard *.c))
 
 
 lib: $(OBJS)
+  # NOTE: We lump the sprockets in there too, for now...
 	$(AR) rcv lib$(LIBNAME).a $(OBJS)
 	$(RANLIB) lib$(LIBNAME).a
 	$(AR) rcv libInputSprocketLib.a MyInputSprocket.o

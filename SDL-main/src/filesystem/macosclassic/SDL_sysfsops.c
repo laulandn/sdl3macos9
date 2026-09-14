@@ -28,34 +28,63 @@
 
 #include "../SDL_sysfilesystem.h"
 
+
+#define DISABLE_MAC_DRIVER 1
+
+
+
 bool SDL_SYS_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback cb, void *userdata)
 {
+#ifdef DISABLE_MAC_DRIVER
     return SDL_Unsupported();
+#else
+    return false;  /* For now... */
+#endif
 }
 
 bool SDL_SYS_RemovePath(const char *path)
 {
+#ifdef DISABLE_MAC_DRIVER
     return SDL_Unsupported();
+#else
+    return false;  /* For now... */
+#endif
 }
 
 bool SDL_SYS_RenamePath(const char *oldpath, const char *newpath)
 {
+#ifdef DISABLE_MAC_DRIVER
     return SDL_Unsupported();
+#else
+    return false;  /* For now... */
+#endif
 }
 
 bool SDL_SYS_CopyFile(const char *oldpath, const char *newpath)
 {
+#ifdef DISABLE_MAC_DRIVER
     return SDL_Unsupported();
+#else
+    return false;  /* For now... */
+#endif
 }
 
 bool SDL_SYS_CreateDirectory(const char *path)
 {
+#ifdef DISABLE_MAC_DRIVER
     return SDL_Unsupported();
+#else
+    return false;  /* For now... */
+#endif
 }
 
 bool SDL_SYS_GetPathInfo(const char *path, SDL_PathInfo *info)
 {
+#ifdef DISABLE_MAC_DRIVER
     return SDL_Unsupported();
+#else
+    return false;  /* For now... */
+#endif
 }
 
 #endif // SDL_FSOPS_MACOSCLASSIC

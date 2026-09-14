@@ -39,6 +39,7 @@ SOURCES = \
 	./src/camera/*.c \
 	./src/cpuinfo/*.c \
 	./src/dialog/*.c \
+	./src/dialog/dummy/*.c \
 	./src/events/*.c \
 	./src/filesystem/macosclassic/*.c \
 	./src/filesystem/SDL_filesystem.c \
@@ -52,13 +53,16 @@ SOURCES = \
 	./src/joystick/dummy/*.c \
 	./src/libm/*.c \
 	./src/locale/*.c \
-	./src/main/macosclassic/*.c \
+	./src/locale/dummy/*.c \
+	./src/loadso/dummy/*.c \
 	./src/main/generic/SDL_sysmain_callbacks.c \
 	./src/main/SDL_main_callbacks.c \
 	./src/main/SDL_runapp.c \
 	./src/misc/*.c \
+	./src/misc/dummy/*.c \
 	./src/power/*.c \
 	./src/process/*.c \
+	./src/process/dummy/*.c \
 	./src/render/*.c \
 	./src/render/opengles2/*.c \
 	./src/render/software/*.c \
@@ -70,7 +74,7 @@ SOURCES = \
 	./src/thread/*.c \
 	./src/thread/generic/*.c \
 	./src/time/SDL_time.c \
-	./src/time/unix/*.c \
+	./src/time/macosclassic/*.c \
 	./src/timer/*.c \
 	./src/timer/unix/*.c \
 	./src/tray/SDL_tray_utils.c \

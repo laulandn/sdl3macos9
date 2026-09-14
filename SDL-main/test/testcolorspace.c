@@ -168,7 +168,7 @@ static bool ReadPixel(int x, int y, SDL_Color *c)
     return result;
 }
 
-static void DrawText(float x, float y, const char *fmt, ...)
+static void DrawText1(float x, float y, const char *fmt, ...)
 {
     char *text;
 
@@ -200,14 +200,14 @@ static void RenderClearBackground(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Clear 50%% Gray Background");
+    DrawText1(x, y, "Test: Clear 50%% Gray Background");
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
+    DrawText1(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
     y += TEXT_LINE_ADVANCE;
     if (c.r != 128) {
-        DrawText(x, y, "Incorrect background color, unknown reason");
+        DrawText1(x, y, "Incorrect background color, unknown reason");
         y += TEXT_LINE_ADVANCE;
     }
 }
@@ -228,14 +228,14 @@ static void RenderDrawBackground(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Draw 50%% Gray Background");
+    DrawText1(x, y, "Test: Draw 50%% Gray Background");
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
+    DrawText1(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
     y += TEXT_LINE_ADVANCE;
     if (c.r != 128) {
-        DrawText(x, y, "Incorrect background color, unknown reason");
+        DrawText1(x, y, "Incorrect background color, unknown reason");
         y += TEXT_LINE_ADVANCE;
     }
 }
@@ -277,14 +277,14 @@ static void RenderTextureBackground(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Fill 50%% Gray Texture");
+    DrawText1(x, y, "Test: Fill 50%% Gray Texture");
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
+    DrawText1(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
     y += TEXT_LINE_ADVANCE;
     if (c.r != 128) {
-        DrawText(x, y, "Incorrect background color, unknown reason");
+        DrawText1(x, y, "Incorrect background color, unknown reason");
         y += TEXT_LINE_ADVANCE;
     }
 }
@@ -315,14 +315,14 @@ static void RenderTargetBackground(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Fill 50%% Gray Render Target");
+    DrawText1(x, y, "Test: Fill 50%% Gray Render Target");
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
+    DrawText1(x, y, "Background color written: 0x808080, read: 0x%.2x%.2x%.2x", c.r, c.g, c.b);
     y += TEXT_LINE_ADVANCE;
     if (c.r != 128) {
-        DrawText(x, y, "Incorrect background color, unknown reason");
+        DrawText1(x, y, "Incorrect background color, unknown reason");
         y += TEXT_LINE_ADVANCE;
     }
 }
@@ -365,19 +365,19 @@ static void RenderBlendDrawing(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Draw Blending");
+    DrawText1(x, y, "Test: Draw Blending");
     y += TEXT_LINE_ADVANCE;
     if (cr.r == 199 && cr.g == 193 && cr.b == 121) {
-        DrawText(x, y, "Correct blend color, blending in linear space");
+        DrawText1(x, y, "Correct blend color, blending in linear space");
     } else if ((cr.r == 192 && cr.g == 163 && cr.b == 83) ||
                (cr.r == 191 && cr.g == 162 && cr.b == 82)) {
-        DrawText(x, y, "Correct blend color, blending in sRGB space");
+        DrawText1(x, y, "Correct blend color, blending in sRGB space");
     } else if (cr.r == 214 && cr.g == 156 && cr.b == 113) {
-        DrawText(x, y, "Incorrect blend color, blending in PQ space");
+        DrawText1(x, y, "Incorrect blend color, blending in PQ space");
     } else {
-        DrawText(x, y, "Incorrect blend color, unknown reason");
+        DrawText1(x, y, "Incorrect blend color, unknown reason");
     }
     y += TEXT_LINE_ADVANCE;
 }
@@ -425,17 +425,17 @@ static void RenderBlendTexture(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Texture Blending");
+    DrawText1(x, y, "Test: Texture Blending");
     y += TEXT_LINE_ADVANCE;
     if (cr.r == 199 && cr.g == 193 && cr.b == 121) {
-        DrawText(x, y, "Correct blend color, blending in linear space");
+        DrawText1(x, y, "Correct blend color, blending in linear space");
     } else if ((cr.r == 192 && cr.g == 163 && cr.b == 83) ||
                (cr.r == 191 && cr.g == 162 && cr.b == 82)) {
-        DrawText(x, y, "Correct blend color, blending in sRGB space");
+        DrawText1(x, y, "Correct blend color, blending in sRGB space");
     } else {
-        DrawText(x, y, "Incorrect blend color, unknown reason");
+        DrawText1(x, y, "Incorrect blend color, unknown reason");
     }
     y += TEXT_LINE_ADVANCE;
 
@@ -486,14 +486,14 @@ static void RenderGradientDrawing(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Draw SDR and HDR gradients");
-    y += TEXT_LINE_ADVANCE;
-
+    DrawText1(x, y, "Test: Draw SDR and HDR gradients");
     y += TEXT_LINE_ADVANCE;
 
-    DrawText(x, y, "SDR gradient");
+    y += TEXT_LINE_ADVANCE;
+
+    DrawText1(x, y, "SDR gradient");
     y += TEXT_LINE_ADVANCE;
     DrawGradient(x, y, WINDOW_WIDTH - 2 * x, 64.0f, 0.0f, 1.0f);
     y += 64.0f;
@@ -502,9 +502,9 @@ static void RenderGradientDrawing(void)
     y += TEXT_LINE_ADVANCE;
 
     if (HDR_headroom > 1.0f) {
-        DrawText(x, y, "HDR gradient");
+        DrawText1(x, y, "HDR gradient");
     } else {
-        DrawText(x, y, "No HDR headroom, HDR and SDR gradient are the same");
+        DrawText1(x, y, "No HDR headroom, HDR and SDR gradient are the same");
     }
     y += TEXT_LINE_ADVANCE;
     /* Drawing is in the sRGB colorspace, so we need to use the color scale, which is applied in linear space, to get into high dynamic range */
@@ -558,14 +558,14 @@ static void RenderGradientTexture(void)
 
     float x = TEXT_START_X;
     float y = TEXT_START_Y;
-    DrawText(x, y, "%s %s", renderer_name, colorspace_name);
+    DrawText1(x, y, "%s %s", renderer_name, colorspace_name);
     y += TEXT_LINE_ADVANCE;
-    DrawText(x, y, "Test: Texture SDR and HDR gradients");
-    y += TEXT_LINE_ADVANCE;
-
+    DrawText1(x, y, "Test: Texture SDR and HDR gradients");
     y += TEXT_LINE_ADVANCE;
 
-    DrawText(x, y, "SDR gradient");
+    y += TEXT_LINE_ADVANCE;
+
+    DrawText1(x, y, "SDR gradient");
     y += TEXT_LINE_ADVANCE;
     DrawGradientTexture(x, y, WINDOW_WIDTH - 2 * x, 64.0f, 0.0f, 1.0f);
     y += 64.0f;
@@ -574,9 +574,9 @@ static void RenderGradientTexture(void)
     y += TEXT_LINE_ADVANCE;
 
     if (HDR_headroom > 1.0f) {
-        DrawText(x, y, "HDR gradient");
+        DrawText1(x, y, "HDR gradient");
     } else {
-        DrawText(x, y, "No HDR headroom, HDR and SDR gradient are the same");
+        DrawText1(x, y, "No HDR headroom, HDR and SDR gradient are the same");
     }
     y += TEXT_LINE_ADVANCE;
     /* The gradient texture is in the linear colorspace, so we can use the HDR_headroom value directly */

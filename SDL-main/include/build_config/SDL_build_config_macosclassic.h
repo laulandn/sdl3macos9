@@ -150,6 +150,7 @@ typedef unsigned int uintptr_t;
 #define HAVE_GCC_SYNC_LOCK_TEST_AND_SET 1
 #endif
 
+
 /* Enable the dummy audio driver (src/audio/dummy/\*.c) */
 #define SDL_AUDIO_DRIVER_DUMMY  1
 
@@ -166,10 +167,14 @@ typedef unsigned int uintptr_t;
 #define SDL_SENSOR_DISABLED 1
 
 /* Enable the stub shared object loader (src/loadso/dummy/\*.c) */
-#define SDL_LOADSO_DISABLED 1
+//#define SDL_LOADSO_DISABLED 1
+#define SDL_LOADSO_DUMMY 1
 
 /* Enable the stub thread support (src/thread/generic/\*.c) */
 #define SDL_THREADS_DISABLED    1
+
+/* Enable RTC system */
+#define SDL_TIME_MACOSCLASSIC 1
 
 /* Enable the stub timer support (src/timer/dummy/\*.c) */
 //#define SDL_TIMERS_DISABLED 1
@@ -183,5 +188,9 @@ typedef unsigned int uintptr_t;
 /*#define SDL_FILESYSTEM_DUMMY  1*/
 #define SDL_FILESYSTEM_MACOSCLASSIC 1
 #define SDL_FSOPS_MACOSCLASSIC 1
+
+#define SDL_DIALOG_DUMMY 1
+
+#define SDL_PROCESS_DUMMY 1
 
 #endif /* SDL_config_macosclassic_h_ */
