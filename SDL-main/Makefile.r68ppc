@@ -20,9 +20,13 @@ ifeq ($(RETRO68_ROOT),)
 RETRO68_ROOT = $(PATH_TO_RETRO68)/..
 endif
 CURSOR_DEVICES_GLUE ?= $(RETRO68_ROOT)/universal/libppc/CursorDevicesGlue.o
+
 CFLAGS ?= -g -Wall -Wshadow
+
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
-CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src -D__MACOSCLASSIC__ -DMAC_DEBUG=1
+CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src 
+CPPFLAGS += -D__MACOSCLASSIC__ -DMAC_DEBUG=1
+CPPFLAGS += -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DMAC_DEBUG=1 -DBUILDING_FOR_PRE9
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1 -DMAC_DEBUG=1
 
@@ -39,6 +43,7 @@ SOURCES = \
 	./src/camera/*.c \
 	./src/cpuinfo/*.c \
 	./src/dialog/*.c \
+	./src/dialog/dummy/*.c \
 	./src/events/*.c \
 	./src/filesystem/macosclassic/*.c \
 	./src/filesystem/SDL_filesystem.c \
@@ -52,12 +57,17 @@ SOURCES = \
 	./src/joystick/dummy/*.c \
 	./src/libm/*.c \
 	./src/locale/*.c \
+	./src/locale/dummy/*.c \
+	./src/loadso/dummy/*.c \
 	./src/main/generic/SDL_sysmain_callbacks.c \
+	./src/main/macosclassic/*.c \
 	./src/main/SDL_main_callbacks.c \
 	./src/main/SDL_runapp.c \
 	./src/misc/*.c \
+	./src/misc/dummy/*.c \
 	./src/power/*.c \
 	./src/process/*.c \
+	./src/process/dummy/*.c \
 	./src/render/*.c \
 	./src/render/opengles2/*.c \
 	./src/render/software/*.c \
@@ -69,7 +79,7 @@ SOURCES = \
 	./src/thread/*.c \
 	./src/thread/generic/*.c \
 	./src/time/SDL_time.c \
-	./src/time/unix/*.c \
+	./src/time/macosclassic/*.c \
 	./src/timer/*.c \
 	./src/timer/unix/*.c \
 	./src/tray/SDL_tray_utils.c \
@@ -122,7 +132,7 @@ clean:
 install:
 	mkdir -p $(PATH_TO_RETRO68)/include/SDL3
 	mkdir -p $(PATH_TO_RETRO68)/lib
-	cp -r include/* $(PATH_TO_RETRO68)/include/SDL3
+	cp -r include/SDL3 $(PATH_TO_RETRO68)/include/.
 	cp libSDL*.a $(PATH_TO_RETRO68)/lib
 
 %.o : %.c

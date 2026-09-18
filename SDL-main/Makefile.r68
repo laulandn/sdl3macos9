@@ -20,9 +20,13 @@ ifeq ($(RETRO68_ROOT),)
 RETRO68_ROOT = $(PATH_TO_RETRO68)/..
 endif
 #CURSOR_DEVICES_GLUE ?= $(RETRO68_ROOT)/universal/libppc/CursorDevicesGlue.o
-CFLAGS ?= -Wall -Wshadow
+
+CFLAGS ?= -g -Wall -Wshadow
+
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
-CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src -D__MACOSCLASSIC__ -DMAC_DEBUG=1
+CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src 
+CPPFLAGS += -D__MACOSCLASSIC__ -DMAC_DEBUG=1
+CPPFLAGS += -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DMAC_DEBUG=1 -DBUILDING_FOR_PRE9
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1 -DMAC_DEBUG=1
 
@@ -56,6 +60,7 @@ SOURCES = \
 	./src/locale/dummy/*.c \
 	./src/loadso/dummy/*.c \
 	./src/main/generic/SDL_sysmain_callbacks.c \
+	./src/main/macosclassic/*.c \
 	./src/main/SDL_main_callbacks.c \
 	./src/main/SDL_runapp.c \
 	./src/misc/*.c \

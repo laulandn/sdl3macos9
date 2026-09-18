@@ -1,15 +1,26 @@
-# Makefile to build the AmigaOS4 SDL tests
+# Makefile to build the m68k SDL tests
 
-CC     = m68k-apple-macos-gcc
-CXX     = m68k-apple-macos-g++
-#CRT   ?= newlib
+PATH_TO_RETRO68=$(HOME)/Retro68-build/toolchain/powerpc-apple-macos
+
+#.SUFFIXES:	.xcoff
+
+CC=m68k-apple-macos-gcc
+CXX=m68k-apple-macos-g++
+#CC=powerpc-apple-macos-gcc
+#CXX=powerpc-apple-macos-g++
+
 #CFLAGS = -mcrt=$(CRT) -gstabs -O3 -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
 CFLAGS = -Wall -I../include -I../include/build_config -I../src
-LIBS   = -L.. -lSDL3_test -lSDL3 ../../macos8addons/libmacos8addons.a -lOpenGLLibrary -lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
+CFLAGS+= -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1-DHAVE_OPENGL=1
+#CFLAGS+= -DSDL_MACOSCLASSIC_TINYGL=1 
 
+LIBS   = -L.. -lSDL3_test -lSDL3 ../../macos8addons/libmacos8addons.a 
+LIBS+=-lOpenGLLibrary 
+LIBS+=-lm -Wl,--relax -Wl,-Map,output.map -Wl,--gc-sections
 
-CFLAGS+= -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_TINYGL=1 -DHAVE_OPENGL=1
-
+RINC=$(PATH_TO_RETRO68)/RIncludes
+#RES=$(RINC)/Retro68APPL.r
+RES=$(RINC)/RetroPPCAPPL.r
 
 SRC_FILES = $(wildcard *.c)
 DEPS = $(SRC_FILES:.c=.d)
@@ -431,7 +442,7 @@ torturethread: torturethread.o
 	../../bin2app.sh $@
 
 clean:
-	rm -f $(TARGETS) *.o $(DEPS)
+	rm -f $(TARGETS) *.o $(DEPS) *.xcoff *.pef *.dsk *.bin *.APPL *.gdb
 
 %.d : %.c
 	@echo Making dependencies for $<
