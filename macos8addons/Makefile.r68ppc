@@ -9,7 +9,7 @@ CXX=powerpc-apple-macos-g++
 AR=powerpc-apple-macos-ar
 RANLIB=powerpc-apple-macos-ranlib
 
-CFLAGS=-D__MACOSCLASSIC__ -I../SDL-main/include
+CFLAGS=-D__MACOSCLASSIC__ -I../SDL-main/include/SDL3 -I../SDL-main/include -I.
 
 OBJS=$(subst .c,.o,$(wildcard *.c))
 
@@ -17,20 +17,20 @@ OBJS=$(subst .c,.o,$(wildcard *.c))
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 
-lib: $(OBJS)
-  # NOTE: We lump the sprockets in there too, for now...
+all: $(OBJS)
 	$(AR) rcv lib$(LIBNAME).a $(OBJS)
 	$(RANLIB) lib$(LIBNAME).a
 	$(AR) rcv libFakeInputSprocketLib.a MyInputSprocket.o
 	$(RANLIB) libFakeInputSprocketLib.a
 	$(AR) rcv libFakeDrawSprocketLib.a MyDrawSprocket.o
 	$(RANLIB) libFakeDrawSprocketLib.a
+	$(AR) rcv libFakeContextualMenu.a MyContextualMenu.o
+	$(RANLIB) libFakeContextualMenu.a
 
 install:
 	cp libFakeDrawSprocketLib.a $(HOME)/Retro68-build/toolchain/powerpc-apple-macos/lib
 	cp libFakeInputSprocketLib.a $(HOME)/Retro68-build/toolchain/powerpc-apple-macos/lib
+	cp libFakeContextualMenu.a $(HOME)/Retro68-build/toolchain/powerpc-apple-macos/lib
 	
-all: $(OBJS)
-
 clean:
 	rm -f *.o *.a
