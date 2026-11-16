@@ -28,9 +28,6 @@
 #ifndef SDL_platform_defines_h_
 #define SDL_platform_defines_h_
 
-// For now...
-#define SDL_PLATFORM_MACOSCLASSIC 1
-
 
 #ifdef _AIX
 
@@ -223,13 +220,22 @@
  *
  * \sa SDL_PLATFORM_APPLE
  */
-//#define SDL_PLATFORM_MACOS 1
+#define SDL_PLATFORM_MACOS 1
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED < 1070
 //    #error SDL for macOS only supports deploying on 10.7 and above.
 #endif /* MAC_OS_X_VERSION_MIN_REQUIRED < 1070 */
 #endif /* TARGET_OS_IPHONE */
 #endif /* defined(__APPLE__) */
+
+
+#ifdef __MACOSCLASSIC__
+#define SDL_PLATFORM_MACOSCLASSIC 1
+#ifdef SDL_PLATFORM_MACOS
+#undef SDL_PLATFORM_MACOS
+#endif
+#endif
+
 
 #ifdef __EMSCRIPTEN__
 

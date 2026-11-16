@@ -70,7 +70,7 @@ static const char GLES2_Vertex_Default[] =                      \
 "varying vec2 v_texCoord;\n"                                    \
 "varying vec4 v_color;\n"                                       \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    v_texCoord = a_texCoord;\n"                                \
 "    gl_Position = u_projection * vec4(a_position, 0.0, 1.0);\n" \
@@ -82,7 +82,7 @@ static const char GLES2_Vertex_Default[] =                      \
 static const char GLES2_Fragment_Solid[] =                      \
 "varying mediump vec4 v_color;\n"                               \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    gl_FragColor = v_color;\n"                                 \
 "}\n"                                                           \
@@ -93,7 +93,7 @@ static const char GLES2_Fragment_TextureABGR[] =                \
 "varying mediump vec4 v_color;\n"                               \
 "varying SDL_TEXCOORD_PRECISION vec2 v_texCoord;\n"             \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    gl_FragColor = texture2D(u_texture, v_texCoord);\n"        \
 "    gl_FragColor *= v_color;\n"                                \
@@ -106,7 +106,7 @@ static const char GLES2_Fragment_TextureARGB[] =                \
 "varying mediump vec4 v_color;\n"                               \
 "varying SDL_TEXCOORD_PRECISION vec2 v_texCoord;\n"             \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec4 abgr = texture2D(u_texture, v_texCoord);\n"   \
 "    gl_FragColor = abgr;\n"                                    \
@@ -122,7 +122,7 @@ static const char GLES2_Fragment_TextureRGB[] =                 \
 "varying mediump vec4 v_color;\n"                               \
 "varying SDL_TEXCOORD_PRECISION vec2 v_texCoord;\n"             \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec4 abgr = texture2D(u_texture, v_texCoord);\n"   \
 "    gl_FragColor = abgr;\n"                                    \
@@ -139,7 +139,7 @@ static const char GLES2_Fragment_TextureBGR[] =                 \
 "varying mediump vec4 v_color;\n"                               \
 "varying SDL_TEXCOORD_PRECISION vec2 v_texCoord;\n"             \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec4 abgr = texture2D(u_texture, v_texCoord);\n"   \
 "    gl_FragColor = abgr;\n"                                    \
@@ -161,7 +161,7 @@ static const char GLES2_Fragment_TextureBGR[] =                 \
 "\n"                                                            \
 
 #define YUV_SHADER_BODY                                         \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec3 yuv;\n"                                       \
 "    lowp vec3 rgb;\n"                                          \
@@ -181,7 +181,7 @@ static const char GLES2_Fragment_TextureBGR[] =                 \
 "}"                                                             \
 
 #define NV12_RA_SHADER_BODY                                     \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec3 yuv;\n"                                       \
 "    lowp vec3 rgb;\n"                                          \
@@ -200,7 +200,7 @@ static const char GLES2_Fragment_TextureBGR[] =                 \
 "}"                                                             \
 
 #define NV12_RG_SHADER_BODY                                     \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec3 yuv;\n"                                       \
 "    lowp vec3 rgb;\n"                                          \
@@ -219,7 +219,7 @@ static const char GLES2_Fragment_TextureBGR[] =                 \
 "}"                                                             \
 
 #define NV21_RA_SHADER_BODY                                     \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec3 yuv;\n"                                       \
 "    lowp vec3 rgb;\n"                                          \
@@ -238,7 +238,7 @@ static const char GLES2_Fragment_TextureBGR[] =                 \
 "}"                                                             \
 
 #define NV21_RG_SHADER_BODY                                     \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    mediump vec3 yuv;\n"                                       \
 "    lowp vec3 rgb;\n"                                          \
@@ -293,7 +293,7 @@ static const char GLES2_Fragment_TextureExternalOES[] =         \
 "varying mediump vec4 v_color;\n"                               \
 "varying SDL_TEXCOORD_PRECISION vec2 v_texCoord;\n"             \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    gl_FragColor = texture2D(u_texture, v_texCoord);\n"        \
 "    gl_FragColor *= v_color;\n"                                \

@@ -11,7 +11,7 @@ CXX=powerpc-apple-macos-g++
 
 #CFLAGS = -mcrt=$(CRT) -gstabs -O3 -Wall -I../include -I../include/build_config -I../src -DHAVE_OPENGL
 CFLAGS = -Wall -I../include -I../include/build_config -I../src
-CFLAGS+= -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1-DHAVE_OPENGL=1
+CFLAGS+= -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DHAVE_OPENGL=1
 #CFLAGS+= -DSDL_MACOSCLASSIC_TINYGL=1 
 
 LIBS   = -L.. -lSDL3_test -lSDL3 ../../macos8addons/libmacos8addons.a 

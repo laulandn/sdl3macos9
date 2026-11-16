@@ -3,6 +3,7 @@ all:
 	make -C dummy_dir -f Makefile.r68ppc
 	make -C macos8addons -f Makefile.r68ppc
 	make -C SDL-main -f Makefile.r68ppc
+	cp -rf */*.a SDL-main/include .
 	
 clean:
 	make -C __debugbreak -f Makefile.r68ppc clean
@@ -15,4 +16,4 @@ clean:
 	make -C dummy_time -f Makefile.r68ppc clean
 	make -C mytests -f Makefile.r68ppc clean
 	make -C SDL-main -f Makefile.r68ppc clean
-	rm -f */*.o */*.a
+	rm -rf */*.o */*.a *.a include

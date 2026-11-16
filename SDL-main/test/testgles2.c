@@ -469,7 +469,7 @@ static const char *g_shader_vert_src =
     " attribute vec3 av3color; "
     " uniform mat4 mvp; "
     " varying vec3 vv3color; "
-    " void main() { "
+    " int main() { "
     "    vv3color = av3color; "
     "    gl_Position = mvp * av4position; "
     " } ";
@@ -477,7 +477,7 @@ static const char *g_shader_vert_src =
 static const char *g_shader_frag_src =
     " precision lowp float; "
     " varying vec3 vv3color; "
-    " void main() { "
+    " int main() { "
     "    gl_FragColor = vec4(vv3color, 1.0); "
     " } ";
 

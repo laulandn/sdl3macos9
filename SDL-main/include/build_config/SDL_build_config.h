@@ -1,4 +1,4 @@
-#define __MACOSCLASSIC__ 1
+//#define __MACOSCLASSIC__ 1
 
 /*
   Simple DirectMedia Layer

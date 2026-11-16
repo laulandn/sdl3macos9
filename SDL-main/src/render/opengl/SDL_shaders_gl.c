@@ -66,7 +66,7 @@ struct GL_ShaderContext
 #define COLOR_VERTEX_SHADER                                     \
 "varying vec4 v_color;\n"                                       \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n" \
 "    v_color = gl_Color;\n"                                     \
@@ -76,7 +76,7 @@ struct GL_ShaderContext
 "varying vec4 v_color;\n"                                       \
 "varying vec2 v_texCoord;\n"                                    \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n" \
 "    v_color = gl_Color;\n"                                     \
@@ -97,7 +97,7 @@ struct GL_ShaderContext
 
 #define YUV_SHADER_BODY                                         \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    vec2 tcoord;\n"                                            \
 "    vec3 yuv, rgb;\n"                                          \
@@ -134,7 +134,7 @@ struct GL_ShaderContext
 
 #define NV12_RA_SHADER_BODY                                     \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    vec2 tcoord;\n"                                            \
 "    vec3 yuv, rgb;\n"                                          \
@@ -159,7 +159,7 @@ struct GL_ShaderContext
 
 #define NV12_RG_SHADER_BODY                                     \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    vec2 tcoord;\n"                                            \
 "    vec3 yuv, rgb;\n"                                          \
@@ -184,7 +184,7 @@ struct GL_ShaderContext
 
 #define NV21_RA_SHADER_BODY                                     \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    vec2 tcoord;\n"                                            \
 "    vec3 yuv, rgb;\n"                                          \
@@ -209,7 +209,7 @@ struct GL_ShaderContext
 
 #define NV21_RG_SHADER_BODY                                     \
 "\n"                                                            \
-"void main()\n"                                                 \
+"int main()\n"                                                 \
 "{\n"                                                           \
 "    vec2 tcoord;\n"                                            \
 "    vec3 yuv, rgb;\n"                                          \
@@ -247,7 +247,7 @@ static const char *shader_source[NUM_SHADERS][2] = {
         // fragment shader
 "varying vec4 v_color;\n"
 "\n"
-"void main()\n"
+"int main()\n"
 "{\n"
 "    gl_FragColor = v_color;\n"
 "}"
@@ -262,7 +262,7 @@ static const char *shader_source[NUM_SHADERS][2] = {
 "varying vec2 v_texCoord;\n"
 "uniform sampler2D tex0;\n"
 "\n"
-"void main()\n"
+"int main()\n"
 "{\n"
 "    gl_FragColor = texture2D(tex0, v_texCoord);\n"
 "    gl_FragColor.a = 1.0;\n"
@@ -279,7 +279,7 @@ static const char *shader_source[NUM_SHADERS][2] = {
 "varying vec2 v_texCoord;\n"
 "uniform sampler2D tex0;\n"
 "\n"
-"void main()\n"
+"int main()\n"
 "{\n"
 "    gl_FragColor = texture2D(tex0, v_texCoord) * v_color;\n"
 "}"

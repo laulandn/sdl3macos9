@@ -1,7 +1,7 @@
 # Makefile to build the classic MacOS SDL library for PPC
 # (Based on AmigaOS4 Makefile)
 
-PATH_TO_RETRO68=$(HOME)/Retro68-build/toolchain/powerpc-apple-macos
+PATH_TO_RETRO68=
 
 AR = ar
 RANLIB = ranlib
@@ -20,9 +20,9 @@ ifeq ($(RETRO68_ROOT),)
 RETRO68_ROOT = $(PATH_TO_RETRO68)/..
 endif
 CURSOR_DEVICES_GLUE ?= 
-CFLAGS ?= -g -Wall -Wshadow -DTARGET_OS_OSX=1 -DTARGET_API_MAC_CARBON=1 -DTARGET_RT_MAC_MACHO=1
+CFLAGS ?= -g -Wall -Wshadow -I/opt/local/include
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1
-CPPFLAGS += -I./include -I./include -I./include/build_config -I./include/SDL3 -I./src -D__MACOSCLASSIC__ -DMAC_DEBUG=1
+CPPFLAGS += -I./include -I./include/build_config -I./include/SDL3 -I./src -D__MACOX__ -I/opt/local/include
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DMAC_DEBUG=1 -DBUILDING_FOR_PRE9
 #CPPFLAGS += -I./include -D__MACOSCLASSIC__ -DSDL_MACOSCLASSIC_INPUTSPROCKET=1 -DSDL_MACOSCLASSIC_DRAWSPROCKET=1 -DSDL_MACOSCLASSIC_AGL=1 -DMAC_DEBUG=1
 
@@ -40,7 +40,6 @@ SOURCES = \
 	./src/cpuinfo/*.c \
 	./src/dialog/*.c \
 	./src/events/*.c \
-	./src/filesystem/macosclassic/*.c \
 	./src/filesystem/SDL_filesystem.c \
 	./src/gpu/SDL_gpu.c \
 	./src/haptic/*.c \
@@ -76,7 +75,6 @@ SOURCES = \
 	./src/tray/dummy/SDL_tray.c \
 	./src/video/*.c \
 	./src/video/dummy/*.c \
-	./src/video/macosclassic/*.c \
 	./src/video/yuv2rgb/*.c \
 
 TESTLIB_SOURCES =./src/test/*.c
@@ -120,10 +118,10 @@ clean:
 	make -C test -fMakefile.r68ppc clean
 
 install:
-	mkdir -p $(PATH_TO_RETRO68)/include/SDL3
-	mkdir -p $(PATH_TO_RETRO68)/lib
-	cp -r include/* $(PATH_TO_RETRO68)/include/SDL3
-	cp libSDL*.a $(PATH_TO_RETRO68)/lib
+#	mkdir -p $(PATH_TO_RETRO68)/include/SDL3
+#	mkdir -p $(PATH_TO_RETRO68)/lib
+#	cp -r include/* $(PATH_TO_RETRO68)/include/SDL3
+#	cp libSDL*.a $(PATH_TO_RETRO68)/lib
 
 %.o : %.c
 	@echo Compiling $<

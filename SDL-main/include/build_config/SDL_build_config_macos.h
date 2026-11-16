@@ -224,8 +224,8 @@
 
 /* Enable OpenGL support */
 #define SDL_VIDEO_OPENGL 1
-#define SDL_VIDEO_OPENGL_ES2 1
-#define SDL_VIDEO_OPENGL_EGL 1
+//#define SDL_VIDEO_OPENGL_ES2 1
+//#define SDL_VIDEO_OPENGL_EGL 1
 #define SDL_VIDEO_OPENGL_CGL 1
 #define SDL_VIDEO_OPENGL_GLX 1
 

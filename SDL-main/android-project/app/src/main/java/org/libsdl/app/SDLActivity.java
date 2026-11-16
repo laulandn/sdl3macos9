@@ -253,7 +253,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
      * to invoke native code from the specified shared library.
      * It can be overridden by derived classes.
      */
-    protected void main() {
+    protected int main() {
         String library = SDLActivity.mSingleton.getMainSharedObject();
         String function = SDLActivity.mSingleton.getMainFunction();
         String[] arguments = SDLActivity.mSingleton.getArguments();

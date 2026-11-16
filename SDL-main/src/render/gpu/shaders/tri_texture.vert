@@ -13,7 +13,7 @@ layout(set = 1, binding = 0) uniform Context {
     vec2 texture_size;
 } u_context;
 
-void main() {
+int main() {
     gl_Position = u_context.mvp * vec4(a_position, 0, 1);
     v_color = a_color;
     v_uv = a_uv / u_context.texture_size;

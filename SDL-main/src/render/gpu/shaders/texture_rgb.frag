@@ -7,6 +7,6 @@ layout(set = 2, binding = 0) uniform sampler2D u_texture;
 
 layout(location = 0) out vec4 o_color;
 
-void main() {
+int main() {
     o_color = vec4(texture(u_texture, v_uv).rgb, 1) * v_color;
 }

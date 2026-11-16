@@ -50,7 +50,7 @@ static ShaderData shaders[NUM_SHADERS] = {
       /* vertex shader */
       "varying vec4 v_color;\n"
       "\n"
-      "void main()\n"
+      "int main()\n"
       "{\n"
       "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n"
       "    v_color = gl_Color;\n"
@@ -58,7 +58,7 @@ static ShaderData shaders[NUM_SHADERS] = {
       /* fragment shader */
       "varying vec4 v_color;\n"
       "\n"
-      "void main()\n"
+      "int main()\n"
       "{\n"
       "    gl_FragColor = v_color;\n"
       "}" },
@@ -69,7 +69,7 @@ static ShaderData shaders[NUM_SHADERS] = {
       "varying vec4 v_color;\n"
       "varying vec2 v_texCoord;\n"
       "\n"
-      "void main()\n"
+      "int main()\n"
       "{\n"
       "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n"
       "    v_color = gl_Color;\n"
@@ -80,7 +80,7 @@ static ShaderData shaders[NUM_SHADERS] = {
       "varying vec2 v_texCoord;\n"
       "uniform sampler2D tex0;\n"
       "\n"
-      "void main()\n"
+      "int main()\n"
       "{\n"
       "    gl_FragColor = texture2D(tex0, v_texCoord) * v_color;\n"
       "}" },
@@ -90,7 +90,7 @@ static ShaderData shaders[NUM_SHADERS] = {
       /* vertex shader */
       "varying vec2 v_texCoord;\n"
       "\n"
-      "void main()\n"
+      "int main()\n"
       "{\n"
       "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n"
       "    v_texCoord = vec2(gl_MultiTexCoord0);\n"
@@ -98,7 +98,7 @@ static ShaderData shaders[NUM_SHADERS] = {
       /* fragment shader */
       "varying vec2 v_texCoord;\n"
       "\n"
-      "void main()\n"
+      "int main()\n"
       "{\n"
       "    vec4 color;\n"
       "    vec2 delta;\n"

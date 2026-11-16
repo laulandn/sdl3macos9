@@ -10,7 +10,7 @@ layout(set = 1, binding = 0) uniform Context {
     vec2 texture_size;  /* XXX unused */
 } u_context;
 
-void main() {
+int main() {
     gl_PointSize = 1.0;  /* FIXME: D3D11 pls */
     gl_Position = u_context.mvp * vec4(a_position, 0, 1);
     v_color = u_context.color;
